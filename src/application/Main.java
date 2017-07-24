@@ -1,10 +1,5 @@
 package application;
 	
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.swing.JOptionPane;
 
 import javafx.application.Application;
@@ -18,11 +13,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import ui.FlickrSettings;
 
 
 public class Main extends Application {
-	
-	private Server server;
 	
 	private GridPane rootPane;
 	
@@ -30,12 +24,14 @@ public class Main extends Application {
 	private final WebEngine engine = browser.getEngine();
 	
 	private FlickrAgent fAgent;
+	private FlickrSettings flickrSettings;
 	
 	@Override
 	public void start (Stage primaryStage) {
 		try {
 			//	Kick off agents
 			fAgent = new FlickrAgent();
+			flickrSettings = new FlickrSettings();
 			
 			primaryStage.setTitle("Photo Butler");
 			
@@ -90,6 +86,7 @@ public class Main extends Application {
 		flickrBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
+				flickrSettings.open();
 			}
 		});
 		rootPane.add(flickrBtn, 1, 0);
